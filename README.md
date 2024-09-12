@@ -18,8 +18,9 @@ This project is a 2D biking simulation game focused on helping beginners learn t
 
 ### Prerequisites
 Make sure you have Python 3.6+ installed. You can verify your Python version by running the following command:
-
+```terminal
 python --version
+```
 
 If you don't have Python installed, you can download it from the official Python website: https://www.python.org/downloads/
 
@@ -35,7 +36,9 @@ For this project, you will need to install the following Python libraries:
 
 Run the following command in your terminal or command prompt:
 
+```terminal
 pip install arcade pillow pygame
+```
 
 #### 2. Special Instructions for Pillow
 
@@ -44,36 +47,50 @@ If you encounter an error while installing Pillow, follow the additional instruc
 ### For macOS Users
 
 1. Install Xcode Command Line Tools:
-   
+
+   ```terminal
    xcode-select --install
+   ```
 
-2. Install Homebrew (if not already installed):
-   
+1. Install Homebrew (if not already installed):
+
+   ```terminal
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-3. Install required dependencies via Homebrew:
+   ```
    
+2. Install required dependencies via Homebrew:
+
+   ```terminal
    brew install libjpeg libtiff little-cms2
+   ```
 
-4. Reinstall Pillow:
-   
+3. Reinstall Pillow:
+
+   ```terminal
    pip install Pillow
+   ```
 
 ### For Windows Users
 
 1. Install Windows Build Tools:
-   
+
+   ```terminal
    npm install -g windows-build-tools
-
+   ```
    (Note: This requires Node.js to be installed. If you don’t have Node.js, you can install it from https://nodejs.org)
-
-2. Reinstall Pillow:
    
+
+1. Reinstall Pillow:
+
+   ```terminal
    pip install --no-cache-dir --force-reinstall Pillow
+   ```
 
 If you encounter further issues, try installing an older version of Pillow:
 
+```terminal
 pip install Pillow==8.4.0
+```
 
 ## How to Run the Project
 
