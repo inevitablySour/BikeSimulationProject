@@ -1,51 +1,43 @@
 from env import BikingQuizEnv
 from agent import QLearningAgent
-import time
-import numpy as np
+import random
 
-def train_agent(env, agent, episodes=1000000, max_steps_per_episode=100, epsilon_decay=0.995):
-    for episode in range(episodes):
-        state = env.get_state_index()
-        step_count = 0
-        done = False
+class Trainer:
+    def __init__(self, episodes=1000000, steps_per_episode=100):
+        self.env = BikingQuizEnv()
+        self.agent = QLearningAgent(actions=["easy", "medium", "hard"])
+        self.episodes = episodes
+        self.steps_per_episode = steps_per_episode
 
-        # Decay epsilon (exploration rate) after each episode
-        agent.epsilon = max(agent.epsilon * epsilon_decay, 0.01)  # Ensure epsilon doesn't go below 0.01
+    def train(self):
+        for episode in range(self.episodes):
+            state = self.env.reset()  # Start from the initial level
+            total_reward = 0
 
-        while not done and step_count < max_steps_per_episode:
-            # Choose action
-            action = agent.choose_action(state)
+            for step in range(self.steps_per_episode):
+                # Agent selects action (difficulty level) based on the current state
+                difficulty = self.agent.select_action(state)
 
-            # Take action and get reward
-            reward, next_state, done = env.step(action)
+                # Environment provides a question and calculates the new state and reward
+                question = self.env.get_question()
 
-            # Update Q-table
-            agent.update_q_table(state, action, reward, next_state)
+                # Simulate the user's response randomly for training purposes
+                correct = random.choice([True, False])  # Randomly simulate user correctness
+                next_state, reward = self.env.step(correct)
+                total_reward += reward
 
-            # Move to the next state
-            state = next_state
-            step_count += 1
+                # Update Q-table for the agent
+                self.agent.update_q_value(state, difficulty, reward, next_state)
+                state = next_state
 
-        # Reset the environment after each episode
-        env.reset()
+            # Decay epsilon after each episode to reduce exploration over time
+            self.agent.decay_epsilon()
+
+            # Optional: print progress every 100,000 episodes
+            if (episode + 1) % 100000 == 0:
+                print(f"Episode {episode + 1}/{self.episodes}, Total Reward: {total_reward}, Epsilon: {self.agent.epsilon}")
 
 if __name__ == "__main__":
-    env = BikingQuizEnv()
-    agent = QLearningAgent(env, learning_rate=0.1, epsilon=0.9)
-      # Multiply epsilon by this factor every episode
-
-    start_time = time.time()
-
-    # Train the agent
-    train_agent(env, agent, episodes=1000000, max_steps_per_episode=100, epsilon_decay = 0.995)  # Start with just 1 episode for testing
-
-    # After training
-    np.save('trained_q_table.npy', agent.env.q_table)
-    print("Q-table saved successfully!")
-
-    # Print the Q-table after training
-    print("Trained Q-table:")
-    print(env.q_table)
-
-    end_time = time.time()
-    print(f"Training completed in {end_time - start_time} seconds")
+    trainer = Trainer(episodes=1000000, steps_per_episode=100)
+    trainer.train()
+    print(trainer.agent.print_q_table())

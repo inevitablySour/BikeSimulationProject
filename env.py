@@ -1,39 +1,61 @@
-import numpy as np
+import random
 
 class BikingQuizEnv:
     def __init__(self):
-        self.states = ['beginner', 'intermediate', 'advanced']  # skill levels
-        self.actions = ['easy', 'medium', 'hard']  # difficulty levels
-        self.q_table = np.zeros((len(self.states), len(self.actions)))  # Initialize Q-table
-        self.state = 0  # Start as a beginner
+        # Define different levels and difficulties for questions
+        self.levels = ["beginner", "intermediate", "advanced"]
+        self.difficulties = ["easy", "medium", "hard"]
+        self.questions = {
+            "beginner": {
+                "easy": ["Beginner Easy Q1", "Beginner Easy Q2"],
+                "medium": ["Beginner Medium Q1", "Beginner Medium Q2"],
+                "hard": ["Beginner Hard Q1", "Beginner Hard Q2"]
+            },
+            "intermediate": {
+                "easy": ["Intermediate Easy Q1", "Intermediate Easy Q2"],
+                "medium": ["Intermediate Medium Q1", "Intermediate Medium Q2"],
+                "hard": ["Intermediate Hard Q1", "Intermediate Hard Q2"]
+            },
+            "advanced": {
+                "easy": ["Advanced Easy Q1", "Advanced Easy Q2"],
+                "medium": ["Advanced Medium Q1", "Advanced Medium Q2"],
+                "hard": ["Advanced Hard Q1", "Advanced Hard Q2"]
+            }
+        }
+        self.state = None
 
-    def get_state_index(self):
+    def reset(self, level="beginner", difficulty="easy"):
+        """ Reset to the initial question level and difficulty """
+        self.state = (level, difficulty)
         return self.state
 
-    def get_action_index(self, action):
-        return self.actions.index(action)
+    def get_question(self):
+        """ Retrieve a question based on the current state (level and difficulty) """
+        level, difficulty = self.state
+        return random.choice(self.questions[level][difficulty])
 
+    def step(self, correct):
+        """ Transition state based on whether the answer is correct """
+        level, difficulty = self.state
 
-    def step(self, action):
-        if action == 'easy':
-            reward = np.random.choice([0.1, 0], p=[0.8, 0.2])
-        elif action == 'medium':
-            reward = np.random.choice([0.4, 0], p=[0.6, 0.4])  # Increased reward
+        # Define rules for moving up or down in difficulty and level
+        if correct:
+            reward = 10
+            if difficulty == "easy":
+                self.state = (level, "medium")
+            elif difficulty == "medium":
+                self.state = (level, "hard")
+            else:
+                next_level_index = min(self.levels.index(level) + 1, len(self.levels) - 1)
+                self.state = (self.levels[next_level_index], "easy")
         else:
-            reward = np.random.choice([0.6, 0], p=[0.4, 0.6])  # Increased reward
+            reward = -5
+            if difficulty == "hard":
+                self.state = (level, "medium")
+            elif difficulty == "medium":
+                self.state = (level, "easy")
+            else:
+                prev_level_index = max(self.levels.index(level) - 1, 0)
+                self.state = (self.levels[prev_level_index], "hard")
 
-        # Adjust skill level and return done (increased chance of moving up/down)
-        if reward > 0:
-            if np.random.rand() < 0.5:  # 50% chance of moving up on success
-                if self.state < len(self.states) - 1:
-                    self.state += 1
-        else:
-            if np.random.rand() < 0.5:  # 50% chance of moving down on failure
-                if self.state > 0:
-                    self.state -= 1
-
-        done = self.state == len(self.states) - 1  # Done when reaching advanced state
-        return reward, self.state, done
-
-    def reset(self):
-        self.state = 0  # Reset to beginner
+        return self.state, reward

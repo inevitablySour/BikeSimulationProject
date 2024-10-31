@@ -60,7 +60,7 @@ if __name__ == "__main__":
 
     # Load the trained Q-table from file
     try:
-        q_table_loaded = np.load('trained_q_table.npy')
+        q_table_loaded = np.load('trained_q_table_new.npy')
         agent.env.q_table = q_table_loaded  # Load the Q-table into the agent's environment
         print("Q-table loaded successfully!")
     except FileNotFoundError:

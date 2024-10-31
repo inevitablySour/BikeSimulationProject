@@ -1,33 +1,41 @@
 import numpy as np
 
 class QLearningAgent:
-    def __init__(self, env, learning_rate=0.1, discount_factor=0.9, epsilon=0.1):
-        self.env = env
-        self.learning_rate = learning_rate
-        self.discount_factor = discount_factor
-        self.epsilon = epsilon
+    def __init__(self, actions, alpha=0.1, gamma=0.9, epsilon=1.0, epsilon_decay=0.9999995):
+        self.actions = actions  # Actions are difficulties (easy, medium, hard)
+        self.alpha = alpha      # Learning rate
+        self.gamma = gamma      # Discount factor
+        self.epsilon = epsilon  # Exploration rate
+        self.epsilon_decay = epsilon_decay
+        self.q_table = {}
 
-    def choose_action(self, state):
-        # Epsilon-greedy strategy for exploration vs exploitation
+    def get_q_value(self, state, action):
+        """ Return Q value for a given state-action pair """
+        return self.q_table.get((state, action), 0.0)
+
+    def update_q_value(self, state, action, reward, next_state):
+        """ Update Q value based on the Q-learning update rule """
+        max_q_next = max([self.get_q_value(next_state, a) for a in self.actions])
+        old_q = self.get_q_value(state, action)
+        new_q = old_q + self.alpha * (reward + self.gamma * max_q_next - old_q)
+        self.q_table[(state, action)] = new_q
+
+    def select_action(self, state):
+        """ Select action based on epsilon-greedy policy """
         if np.random.rand() < self.epsilon:
-            return np.random.choice(self.env.actions)  # Explore
-        else:
-            action_index = np.argmax(self.env.q_table[state])
-            return self.env.actions[action_index]  # Exploit
+            return np.random.choice(self.actions)
+        q_values = [self.get_q_value(state, action) for action in self.actions]
+        max_q = max(q_values)
+        return self.actions[q_values.index(max_q)]
 
-    def update_q_table(self, state, action, reward, next_state):
-        # Get indices for state and action
-        state_index = self.env.get_state_index()
-        action_index = self.env.get_action_index(action)
+    def decay_epsilon(self):
+        """ Decay epsilon for exploration-exploitation balance """
+        self.epsilon *= self.epsilon_decay
 
-        # Current Q-value for the state-action pair
-        current_q_value = self.env.q_table[state_index, action_index]
-
-        # Maximum Q-value for the next state (for all possible actions)
-        best_next_action = np.max(self.env.q_table[next_state])
-
-        # Apply Q-learning formula to compute the new Q-value
-        new_q_value = (1 - self.learning_rate) * current_q_value + self.learning_rate * (reward + self.discount_factor * best_next_action)
-
-        # Update the Q-table with the new Q-value
-        self.env.q_table[state_index, action_index] = new_q_value
+    def get_q_table(self):
+        """ Return the entire Q-table """
+        return self.q_table
+    def print_q_table(self):
+        for state_action, q_value in self.q_table.items():
+            state, action = state_action
+            print(f"State: {state}, Action: {action}, Q-Value: {q_value:.2f}")
