@@ -1,13 +1,9 @@
 import numpy as np
 
 class QLearningAgent:
-    def __init__(self, actions, alpha=0.1, gamma=0.9, epsilon=0.05, epsilon_decay=0.9999995):
-        self.actions = actions  # Actions are difficulties (easy, medium, hard)
-        self.alpha = alpha      # Learning rate
-        self.gamma = gamma      # Discount factor
-        self.epsilon = epsilon  # Exploration rate
-        self.epsilon_decay = epsilon_decay
-        self.q_table = {}
+    def __init__(self, actions, q_table_path=None):
+        self.actions = actions
+        self.q_table = np.load(q_table_path, allow_pickle=True).item() if q_table_path else {}
 
 
     def get_q_value(self, state, action):
@@ -22,12 +18,10 @@ class QLearningAgent:
         self.q_table[(state, action)] = new_q
 
     def select_action(self, state):
-        """ Select action based on epsilon-greedy policy """
-        if np.random.rand() < self.epsilon:
-            return np.random.choice(self.actions)
-        q_values = [self.get_q_value(state, action) for action in self.actions]
-        max_q = max(q_values)
-        return self.actions[q_values.index(max_q)]
+        """Select action based on Q-table values."""
+        q_values = {action: self.q_table.get((state, action), 0) for action in self.actions}
+        best_action = max(q_values, key=q_values.get)
+        return best_action
 
     def decay_epsilon(self):
         """ Decay epsilon for exploration-exploitation balance """

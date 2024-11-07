@@ -1,0 +1,188 @@
+{
+  "beginner": {
+    "easy": [
+      {
+        "question": "What side of the road should you ride on in the Netherlands?",
+        "options": ["Left", "Right", "Middle"],
+        "answer": "Right",
+        "tags": ["lanes", "rules"]
+      },
+      {
+        "question": "What should you do when you hear a bike bell behind you?",
+        "options": ["Move to the left", "Move to the right", "Stop"],
+        "answer": "Move to the right",
+        "tags": ["etiquette", "safety"]
+      },
+      {
+        "question": "What is the color of most bike lanes in the Netherlands?",
+        "options": ["Blue", "Red", "Green"],
+        "answer": "Red",
+        "tags": ["lanes"]
+      }
+    ],
+    "medium": [
+      {
+        "question": "Can you ride a bike without wearing a helmet in the Netherlands?",
+        "options": ["Yes, it’s not mandatory", "No, helmets are required", "Only for kids"],
+        "answer": "Yes, it’s not mandatory",
+        "tags": ["safety", "rules"]
+      },
+      {
+        "question": "What does a bell on a bike indicate?",
+        "options": ["Decoration", "A way to signal to others", "Just for fun"],
+        "answer": "A way to signal to others",
+        "tags": ["etiquette", "safety"]
+      },
+      {
+        "question": "What do two solid lines mean on a bike path?",
+        "options": ["Separate lanes for two directions", "Stop zone", "End of bike path"],
+        "answer": "Separate lanes for two directions",
+        "tags": ["lanes", "rules"]
+      }
+    ],
+    "hard": [
+      {
+        "question": "What is the most important safety gear for cyclists?",
+        "options": ["Gloves", "Helmet", "Knee pads"],
+        "answer": "Helmet",
+        "tags": ["safety"]
+      },
+      {
+        "question": "What should you do when approaching a crosswalk with pedestrians waiting?",
+        "options": ["Speed up", "Stop and let them cross", "Ring the bell to alert them"],
+        "answer": "Stop and let them cross",
+        "tags": ["etiquette", "rules"]
+      },
+      {
+        "question": "What does a red bike lane mean?",
+        "options": ["Pedestrians allowed", "Bikes only", "No entry"],
+        "answer": "Bikes only",
+        "tags": ["lanes", "rules"]
+      }
+    ]
+  },
+  "intermediate": {
+    "easy": [
+      {
+        "question": "How should you signal a left turn while biking?",
+        "options": ["Raise your left hand", "Point your left arm straight out", "Ring your bell"],
+        "answer": "Point your left arm straight out",
+        "tags": ["signals", "safety"]
+      },
+      {
+        "question": "If a bike path merges with a pedestrian area, how should you proceed?",
+        "options": ["Ride quickly", "Slow down and be cautious", "Stop and walk your bike"],
+        "answer": "Slow down and be cautious",
+        "tags": ["safety", "lanes"]
+      },
+      {
+        "question": "When passing another cyclist on the left, what should you do?",
+        "options": ["Ring your bell to warn them", "Speed up without warning", "Move to the right"],
+        "answer": "Ring your bell to warn them",
+        "tags": ["etiquette", "safety"]
+      }
+    ],
+    "medium": [
+      {
+        "question": "Is it legal to use a mobile phone while cycling?",
+        "options": ["Yes, always", "No, it’s not allowed", "Only when hands-free"],
+        "answer": "No, it’s not allowed",
+        "tags": ["safety", "rules"]
+      },
+      {
+        "question": "When should you turn on your bike lights?",
+        "options": ["During the day", "At night or in low visibility", "Only when stopped"],
+        "answer": "At night or in low visibility",
+        "tags": ["safety", "visibility"]
+      },
+      {
+        "question": "What should you do if there is a “Yield” sign on the bike path?",
+        "options": ["Speed up to avoid stopping", "Slow down and give way", "Ignore it"],
+        "answer": "Slow down and give way",
+        "tags": ["rules", "etiquette"]
+      }
+    ],
+    "hard": [
+      {
+        "question": "What should you do if an ambulance approaches while you’re on a bike path?",
+        "options": ["Continue riding", "Move to the right and let it pass", "Stop immediately"],
+        "answer": "Move to the right and let it pass",
+        "tags": ["safety", "etiquette"]
+      },
+      {
+        "question": "When cycling on a shared path with pedestrians, what is expected of cyclists?",
+        "options": ["Ring your bell continuously", "Slow down and be cautious", "Race past them"],
+        "answer": "Slow down and be cautious",
+        "tags": ["etiquette", "safety"]
+      },
+      {
+        "question": "What does it mean if the bike lane has broken white lines?",
+        "options": ["You may leave the bike lane if necessary", "You must stop", "Only pedestrians allowed"],
+        "answer": "You may leave the bike lane if necessary",
+        "tags": ["lanes", "rules"]
+      }
+    ]
+  },
+  "advanced": {
+    "easy": [
+      {
+        "question": "In Maastricht, are cyclists allowed to ride on sidewalks?",
+        "options": ["Yes, anytime", "Only if there’s no bike lane", "No, never"],
+        "answer": "No, never",
+        "tags": ["lanes", "rules"]
+      },
+      {
+        "question": "What’s the fine for cycling through a red light in Maastricht?",
+        "options": ["€50", "€75", "€120"],
+        "answer": "€120",
+        "tags": ["fines", "rules"]
+      },
+      {
+        "question": "What should you do if there is an obstacle on the bike lane?",
+        "options": ["Go around it carefully", "Stop and wait", "Call for help"],
+        "answer": "Go around it carefully",
+        "tags": ["safety", "lanes"]
+      }
+    ],
+    "medium": [
+      {
+        "question": "When can you use a car lane instead of a bike lane in Maastricht?",
+        "options": ["When the bike lane is blocked", "Anytime", "Never"],
+        "answer": "When the bike lane is blocked",
+        "tags": ["lanes", "rules"]
+      },
+      {
+        "question": "What color are most yield signs in the Netherlands?",
+        "options": ["Red and white", "Blue and white", "Green"],
+        "answer": "Red and white",
+        "tags": ["signals", "rules"]
+      },
+      {
+        "question": "Are cyclists allowed to make a U-turn on bike paths in Maastricht?",
+        "options": ["Yes, if safe", "No", "Only at designated areas"],
+        "answer": "Only at designated areas",
+        "tags": ["lanes", "rules"]
+      }
+    ],
+    "hard": [
+      {
+        "question": "What should you do at a crossing with no traffic signals when a car is approaching?",
+        "options": ["Stop and yield to the car", "Speed up to cross", "Ring your bell"],
+        "answer": "Stop and yield to the car",
+        "tags": ["rules", "safety"]
+      },
+      {
+        "question": "What does a flashing amber light indicate at a bike crossing?",
+        "options": ["Proceed with caution", "Stop immediately", "Yield to traffic"],
+        "answer": "Proceed with caution",
+        "tags": ["signals", "rules"]
+      },
+      {
+        "question": "What is required for a bike to be street-legal in Maastricht?",
+        "options": ["Bell, lights, and reflectors", "Just lights", "Reflectors only"],
+        "answer": "Bell, lights, and reflectors",
+        "tags": ["safety", "equipment", "rules"]
+      }
+    ]
+  }
+}
