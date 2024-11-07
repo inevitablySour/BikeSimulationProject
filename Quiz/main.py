@@ -19,7 +19,7 @@ class BikingQuizGUI:
 
         # Initialize variables
         self.user_id = self.get_next_user_id()
-        self.agent = QLearningAgent(actions=["easy", "medium", "hard"], q_table_path="Quiz/trained_q_table_new.npy")
+        self.agent = QLearningAgent(actions=["easy", "medium", "hard"], q_table_path="RLM/trained_q_table.npy")
         self.level = "beginner"
         self.difficulty = "easy"
         self.score = 0
