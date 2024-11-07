@@ -6,10 +6,10 @@ import time
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from collections import Counter
-from agent import QLearningAgent
+from RLM.agent import QLearningAgent
 
 # Load questions from JSON file
-with open('biking_questions.json', 'r') as f:
+with open('Quiz/biking_questions.json', 'r') as f:
     questions = json.load(f)
 
 class BikingQuizGUI:
@@ -19,7 +19,7 @@ class BikingQuizGUI:
 
         # Initialize variables
         self.user_id = self.get_next_user_id()
-        self.agent = QLearningAgent(actions=["easy", "medium", "hard"], q_table_path="trained_q_table_new.npy")
+        self.agent = QLearningAgent(actions=["easy", "medium", "hard"], q_table_path="Quiz/trained_q_table_new.npy")
         self.level = "beginner"
         self.difficulty = "easy"
         self.score = 0

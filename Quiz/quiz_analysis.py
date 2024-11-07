@@ -4,7 +4,7 @@ from collections import Counter
 import matplotlib.pyplot as plt
 
 class QuizAnalysis:
-    def __init__(self, data_file="quiz_results.json"):
+    def __init__(self, data_file="Quiz/quiz_results.json"):
         self.data_file = data_file
         self.all_results = []
 
@@ -43,7 +43,7 @@ class QuizAnalysis:
         plt.tight_layout()  # Adjust layout to fit labels
         plt.show()
 
-    def export_to_excel(self, output_file="quiz_results.xlsx"):
+    def export_to_excel(self, output_file="Quiz/quiz_results.xlsx"):
         """Export quiz results to an Excel file with separate tables for detailed results and summary by tag."""
         if not self.all_results:
             print("No data available to export.")

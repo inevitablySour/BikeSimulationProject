@@ -37,7 +37,7 @@ class Trainer:
             if (episode + 1) % 100000 == 0:
                 print(f"Episode {episode + 1}/{self.episodes}, Total Reward: {total_reward}, Epsilon: {self.agent.epsilon}")
 
-        self.agent.save_q_table('trained_q_table_new.npy')
+        self.agent.save_q_table('Quiz/trained_q_table_new.npy')
 
 if __name__ == "__main__":
     trainer = Trainer(episodes=1000000, steps_per_episode=100)
