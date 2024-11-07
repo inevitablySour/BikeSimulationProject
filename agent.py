@@ -1,13 +1,14 @@
 import numpy as np
 
 class QLearningAgent:
-    def __init__(self, actions, alpha=0.1, gamma=0.9, epsilon=1.0, epsilon_decay=0.9999995):
+    def __init__(self, actions, alpha=0.1, gamma=0.9, epsilon=0.05, epsilon_decay=0.9999995):
         self.actions = actions  # Actions are difficulties (easy, medium, hard)
         self.alpha = alpha      # Learning rate
         self.gamma = gamma      # Discount factor
         self.epsilon = epsilon  # Exploration rate
         self.epsilon_decay = epsilon_decay
         self.q_table = {}
+
 
     def get_q_value(self, state, action):
         """ Return Q value for a given state-action pair """
@@ -39,3 +40,7 @@ class QLearningAgent:
         for state_action, q_value in self.q_table.items():
             state, action = state_action
             print(f"State: {state}, Action: {action}, Q-Value: {q_value:.2f}")
+
+    def save_q_table(self, file_path):
+        """Save the Q-table to a .npy file."""
+        np.save(file_path, self.q_table)

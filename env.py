@@ -37,10 +37,18 @@ class BikingQuizEnv:
     def step(self, correct):
         """ Transition state based on whether the answer is correct """
         level, difficulty = self.state
+        base_reward = 10 if correct else -5  # Initial base reward structure
 
-        # Define rules for moving up or down in difficulty and level
+        # Bonus rewards based on state to encourage appropriate challenge level
+        if level == "advanced" and difficulty == "hard" and correct:
+            reward = base_reward + 5  # Extra reward for advanced-hard correct answers
+        elif level == "intermediate" and difficulty == "medium" and correct:
+            reward = base_reward + 3  # Smaller reward bump for intermediate-medium
+        else:
+            reward = base_reward
+
+        # Adjust difficulty and level progression based on correctness
         if correct:
-            reward = 10
             if difficulty == "easy":
                 self.state = (level, "medium")
             elif difficulty == "medium":
@@ -49,7 +57,6 @@ class BikingQuizEnv:
                 next_level_index = min(self.levels.index(level) + 1, len(self.levels) - 1)
                 self.state = (self.levels[next_level_index], "easy")
         else:
-            reward = -5
             if difficulty == "hard":
                 self.state = (level, "medium")
             elif difficulty == "medium":

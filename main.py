@@ -1,71 +1,62 @@
-import numpy as np
-from env import BikingQuizEnv
+import tkinter as tk
+from tkinter import messagebox
+import random
 from agent import QLearningAgent
+from biking_rules import questions
 
-class QuizGame:
-    def __init__(self, agent):
-        self.agent = agent
-        self.env = agent.env  # Use the same environment as the agent
-        self.current_state = 0  # Starting as a beginner
-        self.score = 0  # Track the user's score
+class BikingQuizGUI:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Maastricht Biking Quiz")
+        self.agent = QLearningAgent(actions=["easy", "medium", "hard"], q_table_path="trained_q_table_new.npy")
+        self.level = "beginner"
+        self.difficulty = "easy"
+        self.score = 0
+        self.state = (self.level, self.difficulty)
+        self.question_data = None
 
-    def get_user_answer(self, difficulty):
-        """ Simulate the user answering the question """
-        if difficulty == 'easy':
-            return np.random.choice([1, 0], p=[0.8, 0.2])
-        elif difficulty == 'medium':
-            return np.random.choice([1, 0], p=[0.6, 0.4])
+        # Setup GUI
+        self.question_label = tk.Label(root, text="", wraplength=400)
+        self.question_label.pack(pady=20)
+
+        self.options = []
+        for i in range(3):  # assuming 3 multiple-choice options per question
+            option_button = tk.Button(root, text="", width=50, command=lambda idx=i: self.check_answer(idx))
+            option_button.pack(pady=5)
+            self.options.append(option_button)
+
+        self.load_question()
+
+    def load_question(self):
+        # Select the best action based on AI
+        action = self.agent.select_action(self.state)
+        self.difficulty = action
+        self.question_data = random.choice(questions[self.level][self.difficulty])
+
+        # Update GUI with new question and options
+        self.question_label.config(text=self.question_data["question"])
+        for idx, option in enumerate(self.question_data["options"]):
+            self.options[idx].config(text=option)
+
+    def check_answer(self, selected_idx):
+        selected_answer = self.question_data["options"][selected_idx]
+        if selected_answer == self.question_data["answer"]:
+            self.score += 10
+            messagebox.showinfo("Correct", "That's correct!")
         else:
-            return np.random.choice([1, 0], p=[0.4, 0.6])
+            self.score -= 5
+            messagebox.showerror("Incorrect", f"The correct answer was: {self.question_data['answer']}")
 
-    def play_round(self):
-        # Agent chooses the difficulty based on the current state
-        difficulty = self.agent.choose_action(self.current_state)
-        print(f"\nPresenting a {difficulty} question to the user.")
+        # Adjust state based on performance
+        if self.score >= 30 and self.level == "beginner":
+            self.level = "intermediate"
+        elif self.score >= 60 and self.level == "intermediate":
+            self.level = "advanced"
 
-        # Simulate user answering the question
-        user_correct = self.get_user_answer(difficulty)
-        print(f"User answered {'correctly' if user_correct else 'incorrectly'}.")
+        self.state = (self.level, self.difficulty)
+        self.load_question()
 
-        # Update state and reward based on the environment's response
-        reward, new_state, done = self.env.step(difficulty)
-        self.agent.update_q_table(self.current_state, difficulty, reward, new_state)
-
-        # Update the current state
-        self.current_state = new_state
-        self.score += user_correct
-
-        if done:
-            print("Congratulations! You've reached the advanced level.")
-            return True  # Game ends when the advanced state is reached
-        return False  # Continue the game if not done
-
-    def play(self):
-        """ Run the quiz until the user reaches the advanced state """
-        game_over = False
-        round_num = 1
-
-        while not game_over:
-            print(f"\n--- Round {round_num} ---")
-            game_over = self.play_round()
-            round_num += 1
-
-        print(f"Game Over! Your final score is {self.score}.")
-
-# Main entry point to run the quiz game
 if __name__ == "__main__":
-    # Initialize the environment and agent
-    env = BikingQuizEnv()
-    agent = QLearningAgent(env, learning_rate=0.1, epsilon=0.1)  # Use lower epsilon for more exploitation during quiz
-
-    # Load the trained Q-table from file
-    try:
-        q_table_loaded = np.load('trained_q_table_new.npy')
-        agent.env.q_table = q_table_loaded  # Load the Q-table into the agent's environment
-        print("Q-table loaded successfully!")
-    except FileNotFoundError:
-        print("Trained Q-table not found! Please train the agent first.")
-
-    # Run the quiz with the loaded agent
-    quiz_game = QuizGame(agent)
-    quiz_game.play()
+    root = tk.Tk()
+    quiz_app = BikingQuizGUI(root)
+    root.mainloop()
