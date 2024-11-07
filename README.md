@@ -1,13 +1,15 @@
-# 2D Biking Simulation Game
+# Biking Rules Quiz and Analysis Tool
 
 ## Project Overview
-This project is a 2D biking simulation game focused on helping beginners learn the rules of biking and improve their skills in a fun, interactive environment. The game provides real-time feedback to players and tracks their progress, helping them improve over time. The goal is to create an educational tool that promotes healthy and safe biking practices.
+This project is a multiple-choice biking rules quiz designed to help users learn and reinforce their understanding of biking regulations, specifically focusing on the rules in Maastricht. The quiz provides immediate feedback and tracks each user’s progress, adjusting the difficulty level based on performance. After completing the quiz, users receive a personalized analysis of their strengths and weaknesses. All results are logged for further analysis and can be exported for review.
 
 ## Features
-- Interactive Tutorials: Real-time biking rule tutorials.
-- AI-Driven Feedback: Players get immediate feedback when they make mistakes (e.g., running a red light, not signaling a turn).
-- Progress Tracking: Tracks the player's performance and suggests areas for improvement.
-- 2D Graphics: Simple 2D world with customizable biking levels.
+- Adaptive Difficulty: The quiz adjusts question difficulty based on the user’s performance, moving through beginner, intermediate, and advanced levels.
+- Real-Time Feedback: Users receive immediate feedback on each question, with correct/incorrect messages shown in the same window.
+- Progress Tracking: Tracks progress with a visual progress bar and adjusts the user’s level based on cumulative score.
+- Detailed Analysis: Provides a summary of incorrectly answered questions by category, helping users focus on areas that need improvement. 
+- Data Export: Exports quiz data, including correct and incorrect answers by category, to an Excel file for comprehensive analysis.
+
 
 ## Git Installation Instructions
 
@@ -46,9 +48,9 @@ Alternatively, you can install Git using Homebrew if you have it installed:
    ```
 
 ## Libraries Used
-- Arcade: Used for creating the 2D game engine, managing graphics, inputs, and game logic.
-- Pillow: Used for handling and manipulating game assets like images and sprites.
-- Pygame: An alternative library for handling 2D game creation and managing game loops.
+- tkinter: Provides the GUI framework for the quiz and analysis windows.
+- matplotlib: Generates charts for the analysis of quiz performance.
+- pandas: Exports quiz data to an Excel file for further analysis.
 
 ## Installation Instructions
 
@@ -67,21 +69,20 @@ If you don't have Python installed, you can download it from the official Python
 
 For this project, you will need to install the following Python libraries:
 
-- Arcade
-- Pillow
-- Pygame
+- tkinter
+- matplotlib
+- pandas
 
-Run the following command in your terminal or command prompt:
+Run the following command in your terminal or command prompt to install the necessary libraries:
 
 ```terminal
-pip install arcade pillow pygame
+pip install matplotlib pandas
 ```
 
-#### 2. Special Instructions for Pillow
+#### 2. Special Instructions for macOS Users
 
-If you encounter an error while installing Pillow, follow the additional instructions below based on your operating system.
+If you encounter issues installing matplotlib, you may need to install additional dependencies:
 
-### For macOS Users
 
 1. Install Xcode Command Line Tools:
 
@@ -89,39 +90,36 @@ If you encounter an error while installing Pillow, follow the additional instruc
    xcode-select --install
    ```
 
-1. Install Homebrew (if not already installed):
+2. Install Homebrew (if not already installed):
 
    ```terminal
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
    
-2. Install required dependencies via Homebrew:
+3. Install required dependencies via Homebrew:
 
    ```terminal
-   brew install libjpeg libtiff little-cms2
+   brew install pkg-config freetype
    ```
 
-3. Reinstall Pillow:
+4. Reinstall Matplotlib:
 
    ```terminal
-   pip install Pillow
+   pip install matplotlib
    ```
 
-### For Windows Users
+### Analysis and Data Export
 
-1. Install Windows Build Tools:
+1. ##### Automatic Analysis:
 
-   ```terminal
-   npm install -g windows-build-tools
-   ```
-
-   (Note: This requires Node.js to be installed. If you don’t have Node.js, you can install it from https://nodejs.org)
+    Upon quiz completion, a new window opens, displaying a chart with a breakdown of incorrect answers by topic. This allows users to identify specific areas for improvement.
    
-2. Reinstall Pillow:
+2. ##### Exporting to Excel:
 
-   ```terminal
-   pip install --no-cache-dir --force-reinstall Pillow
-   ```
+    The quiz results are stored in a JSON file and can be exported to an Excel file. The export includes:
+
+   - A detailed table with each question answered, categorized by correct and incorrect answers.
+   - A summary table that lists each topic alongside the number of correct and incorrect responses associated with it.
    
 If you encounter further issues, try installing an older version of Pillow:
 
