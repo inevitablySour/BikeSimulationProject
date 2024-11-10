@@ -18,6 +18,18 @@
         "options": ["Blue", "Red", "Green"],
         "answer": "Red",
         "tags": ["lanes"]
+      },
+      {
+        "question": "Is it allowed to cycle on the sidewalk?",
+        "options": ["Yes", "No", "Only when the bike lane is crowded"],
+        "answer": "No",
+        "tags": ["lanes", "rules"]
+      },
+      {
+        "question": "What does a red circle with a white center on a sign mean?",
+        "options": ["No entry for bicycles", "Bike lane ends", "Pedestrians only"],
+        "answer": "No entry for bicycles",
+        "tags": ["rules", "signals"]
       }
     ],
     "medium": [
@@ -38,6 +50,18 @@
         "options": ["Separate lanes for two directions", "Stop zone", "End of bike path"],
         "answer": "Separate lanes for two directions",
         "tags": ["lanes", "rules"]
+      },
+      {
+        "question": "How should you signal a left turn?",
+        "options": ["Wave with both hands", "Extend your left arm", "Point right"],
+        "answer": "Extend your left arm",
+        "tags": ["signals", "safety"]
+      },
+      {
+        "question": "What should you do when approaching a crosswalk?",
+        "options": ["Stop and let pedestrians cross", "Speed up", "Ring your bell"],
+        "answer": "Stop and let pedestrians cross",
+        "tags": ["etiquette", "safety"]
       }
     ],
     "hard": [
@@ -48,16 +72,28 @@
         "tags": ["safety"]
       },
       {
-        "question": "What should you do when approaching a crosswalk with pedestrians waiting?",
-        "options": ["Speed up", "Stop and let them cross", "Ring the bell to alert them"],
-        "answer": "Stop and let them cross",
-        "tags": ["etiquette", "rules"]
-      },
-      {
         "question": "What does a red bike lane mean?",
         "options": ["Pedestrians allowed", "Bikes only", "No entry"],
         "answer": "Bikes only",
         "tags": ["lanes", "rules"]
+      },
+      {
+        "question": "What is the fine for biking through a red light?",
+        "options": ["€50", "€70", "€120"],
+        "answer": "€120",
+        "tags": ["fines", "rules"]
+      },
+      {
+        "question": "What should you do if your bike lights are broken?",
+        "options": ["Cycle only during the day", "Walk your bike at night", "Repair them immediately"],
+        "answer": "Repair them immediately",
+        "tags": ["safety", "equipment"]
+      },
+      {
+        "question": "How often should you check your brakes?",
+        "options": ["Once a week", "Every few months", "Before each ride"],
+        "answer": "Before each ride",
+        "tags": ["safety", "maintenance"]
       }
     ]
   },
@@ -80,6 +116,18 @@
         "options": ["Ring your bell to warn them", "Speed up without warning", "Move to the right"],
         "answer": "Ring your bell to warn them",
         "tags": ["etiquette", "safety"]
+      },
+      {
+        "question": "Is it mandatory to use bike lights at night?",
+        "options": ["Yes", "No", "Only if there are no street lights"],
+        "answer": "Yes",
+        "tags": ["safety", "visibility"]
+      },
+      {
+        "question": "What should you do if there’s an obstacle in the bike lane?",
+        "options": ["Go around it", "Stop and wait", "Call for help"],
+        "answer": "Go around it",
+        "tags": ["safety", "lanes"]
       }
     ],
     "medium": [
@@ -100,6 +148,18 @@
         "options": ["Speed up to avoid stopping", "Slow down and give way", "Ignore it"],
         "answer": "Slow down and give way",
         "tags": ["rules", "etiquette"]
+      },
+      {
+        "question": "When can you use a pedestrian sidewalk?",
+        "options": ["Only if biking lanes are full", "Never", "Only when walking the bike"],
+        "answer": "Only when walking the bike",
+        "tags": ["rules", "lanes"]
+      },
+      {
+        "question": "How can you warn a pedestrian of your approach?",
+        "options": ["Ring the bell", "Yell", "Do nothing"],
+        "answer": "Ring the bell",
+        "tags": ["etiquette", "safety"]
       }
     ],
     "hard": [
@@ -110,16 +170,28 @@
         "tags": ["safety", "etiquette"]
       },
       {
-        "question": "When cycling on a shared path with pedestrians, what is expected of cyclists?",
-        "options": ["Ring your bell continuously", "Slow down and be cautious", "Race past them"],
-        "answer": "Slow down and be cautious",
-        "tags": ["etiquette", "safety"]
+        "question": "What is required for a bike to be street-legal in the Netherlands?",
+        "options": ["Bell, lights, and reflectors", "Just lights", "Reflectors only"],
+        "answer": "Bell, lights, and reflectors",
+        "tags": ["safety", "equipment"]
       },
       {
-        "question": "What does it mean if the bike lane has broken white lines?",
-        "options": ["You may leave the bike lane if necessary", "You must stop", "Only pedestrians allowed"],
-        "answer": "You may leave the bike lane if necessary",
+        "question": "Is it legal to ride on the road if there is a bike lane?",
+        "options": ["Yes, if convenient", "No, use the bike lane", "Only during rush hour"],
+        "answer": "No, use the bike lane",
         "tags": ["lanes", "rules"]
+      },
+      {
+        "question": "What is the penalty for riding without lights at night?",
+        "options": ["€25", "€55", "€75"],
+        "answer": "€55",
+        "tags": ["fines", "safety"]
+      },
+      {
+        "question": "How should you behave at a pedestrian crossing?",
+        "options": ["Speed up to cross faster", "Stop if pedestrians are present", "Ring your bell continuously"],
+        "answer": "Stop if pedestrians are present",
+        "tags": ["etiquette", "safety"]
       }
     ]
   },
@@ -142,6 +214,18 @@
         "options": ["Go around it carefully", "Stop and wait", "Call for help"],
         "answer": "Go around it carefully",
         "tags": ["safety", "lanes"]
+      },
+      {
+        "question": "When is it acceptable to ride against traffic?",
+        "options": ["Never", "When bike lane is crowded", "At night"],
+        "answer": "Never",
+        "tags": ["safety", "rules"]
+      },
+      {
+        "question": "Can cyclists use a bus lane in the Netherlands?",
+        "options": ["Yes, if there are no buses", "No", "Only with a sign allowing bikes"],
+        "answer": "Only with a sign allowing bikes",
+        "tags": ["lanes", "rules"]
       }
     ],
     "medium": [
@@ -162,6 +246,18 @@
         "options": ["Yes, if safe", "No", "Only at designated areas"],
         "answer": "Only at designated areas",
         "tags": ["lanes", "rules"]
+      },
+      {
+        "question": "What does a flashing amber light mean at a bike crossing?",
+        "options": ["Proceed with caution", "Stop immediately", "Yield to traffic"],
+        "answer": "Proceed with caution",
+        "tags": ["signals", "rules"]
+      },
+      {
+        "question": "Can cyclists ride side by side on bike paths?",
+        "options": ["Yes, always", "Only when no other bikes are present", "Only in specific lanes"],
+        "answer": "Only in specific lanes",
+        "tags": ["lanes", "etiquette"]
       }
     ],
     "hard": [
@@ -172,16 +268,28 @@
         "tags": ["rules", "safety"]
       },
       {
-        "question": "What does a flashing amber light indicate at a bike crossing?",
-        "options": ["Proceed with caution", "Stop immediately", "Yield to traffic"],
-        "answer": "Proceed with caution",
-        "tags": ["signals", "rules"]
-      },
-      {
         "question": "What is required for a bike to be street-legal in Maastricht?",
         "options": ["Bell, lights, and reflectors", "Just lights", "Reflectors only"],
         "answer": "Bell, lights, and reflectors",
         "tags": ["safety", "equipment", "rules"]
+      },
+      {
+        "question": "What does a bike symbol with a red line through it mean?",
+        "options": ["No entry for bikes", "Bike lane ahead", "Slow down"],
+        "answer": "No entry for bikes",
+        "tags": ["rules", "signals"]
+      },
+      {
+        "question": "What should you do if you see pedestrians on the bike lane?",
+        "options": ["Slow down", "Speed up", "Ring your bell continuously"],
+        "answer": "Slow down",
+        "tags": ["etiquette", "safety"]
+      },
+      {
+        "question": "What should you do if a traffic light is red?",
+        "options": ["Stop and wait", "Look for other cars and proceed", "Only stop if cars are present"],
+        "answer": "Stop and wait",
+        "tags": ["safety", "rules"]
       }
     ]
   }
