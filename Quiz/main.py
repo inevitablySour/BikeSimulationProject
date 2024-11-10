@@ -8,7 +8,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from collections import Counter
 from RLM.agent import QLearningAgent
 
-# Load questions from JSON file
+
 with open('Quiz/biking_questions.json', 'r') as f:
     questions = json.load(f)
 
@@ -17,7 +17,6 @@ class BikingQuizGUI:
         self.root = root
         self.root.title("Maastricht Biking Quiz")
 
-        # Initialize variables
         self.user_id = self.get_next_user_id()
         self.agent = QLearningAgent(actions=["easy", "medium", "hard"], q_table_path="RLM/trained_q_table.npy")
         self.level = "beginner"
@@ -25,13 +24,13 @@ class BikingQuizGUI:
         self.score = 0
         self.correct_answers = 0
         self.incorrect_answers = 0
-        self.start_time = time.time()  # Start timer immediately
+        self.start_time = time.time()
         self.question_number = 1
         self.state = (self.level, self.difficulty)
         self.question_data = None
-        self.results = []  # To store each question result for this quiz session
+        self.results = []
 
-        # Set up quiz GUI elements
+
         self.setup_quiz_interface()
         self.load_question()
 
@@ -39,9 +38,9 @@ class BikingQuizGUI:
         """Determine the next available User ID by counting existing entries in the JSON file."""
         try:
             with open("quiz_results.json", "r") as f:
-                return sum(1 for _ in f) + 1  # ID starts at 1 for the first user
+                return sum(1 for _ in f) + 1
         except FileNotFoundError:
-            return 1  # If no file exists, this is the first user
+            return 1
 
     def setup_quiz_interface(self):
         """Set up the main quiz interface."""
@@ -89,12 +88,15 @@ class BikingQuizGUI:
 
     def load_question(self):
         """Load a question based on the AI-selected difficulty."""
+        # Select the best action based on AI and update difficulty
+        action = self.agent.select_action(self.state)
+        self.difficulty = action
+
+        # Update info label with the correct difficulty before displaying the question
         self.update_info_label()
         self.update_progress_bar()
 
-        # Select the best action based on AI and update state
-        action = self.agent.select_action(self.state)
-        self.difficulty = action
+        # Select a random question from the chosen difficulty level
         self.question_data = random.choice(questions[self.level][self.difficulty])
 
         # Display question and options
@@ -118,7 +120,6 @@ class BikingQuizGUI:
             self.incorrect_answers += 1
             self.show_feedback(f"Incorrect! The correct answer was: {self.question_data['answer']}", "red")
 
-        # Log question, answer, and tags to results
         self.results.append({
             "user_id": self.user_id,
             "question": self.question_data["question"],
@@ -126,7 +127,6 @@ class BikingQuizGUI:
             "tags": self.question_data["tags"]
         })
 
-        # Adjust level based on score thresholds and allow for downgrading
         if self.score >= 60:
             self.level = "advanced"
         elif 30 <= self.score < 60:
@@ -134,11 +134,9 @@ class BikingQuizGUI:
         else:
             self.level = "beginner"
 
-        # Update state and question number
         self.state = (self.level, self.difficulty)
         self.question_number += 1
 
-        # Load the next question after a short delay
         self.root.after(1500, self.load_question)
 
     def show_feedback(self, message, color):
@@ -184,28 +182,23 @@ class BikingQuizGUI:
         stats_label = tk.Label(self.root, text=stats_message, font=("Arial", 14))
         stats_label.pack(pady=10)
 
-        # Save results to JSON file
         with open("quiz_results.json", "a") as f:
             json.dump(self.results, f)
             f.write("\n")
 
-        # Show personalized analysis
         self.show_analysis()
 
     def show_analysis(self):
         """Analyze the user's data and display a graph of incorrect answers by tag in a new window."""
         incorrect_by_tag = Counter()
 
-        # Collect data only for this user's session
         for entry in self.results:
             if not entry["correct"]:
                 incorrect_by_tag.update(entry["tags"])
 
-        # Plot the incorrect answers by tag
         tags = list(incorrect_by_tag.keys())
         counts = list(incorrect_by_tag.values())
 
-        # Create a new window for the plot
         plot_window = tk.Toplevel(self.root)
         plot_window.title(f"Analysis for User ID {self.user_id}")
 
@@ -215,9 +208,8 @@ class BikingQuizGUI:
         ax.set_xlabel("Tag")
         ax.set_ylabel("Number of Incorrect Answers")
         ax.set_xticklabels(tags, rotation=45, ha="right")
-        plt.tight_layout()  # Adjust layout to fit labels
+        plt.tight_layout()
 
-        # Embed the plot in the new window
         canvas = FigureCanvasTkAgg(fig, master=plot_window)
         canvas.draw()
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)

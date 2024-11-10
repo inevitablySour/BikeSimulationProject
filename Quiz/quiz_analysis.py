@@ -8,7 +8,6 @@ class QuizAnalysis:
         self.data_file = data_file
         self.all_results = []
 
-        # Load data from file
         self.load_data()
 
     def load_data(self):
@@ -25,12 +24,10 @@ class QuizAnalysis:
         """Aggregate data for all users and plot incorrect answers by tag."""
         incorrect_by_tag = Counter()
 
-        # Collect all incorrect answers by tag
         for entry in self.all_results:
             if not entry["correct"]:
                 incorrect_by_tag.update(entry["tags"])
 
-        # Plot the incorrect answers by tag
         tags = list(incorrect_by_tag.keys())
         counts = list(incorrect_by_tag.values())
 
@@ -49,7 +46,6 @@ class QuizAnalysis:
             print("No data available to export.")
             return
 
-        # Prepare data for the first table: Detailed results
         data = {
             "User ID": [entry["user_id"] for entry in self.all_results],
             "Question": [entry["question"] for entry in self.all_results],
@@ -59,7 +55,6 @@ class QuizAnalysis:
         }
         detailed_df = pd.DataFrame(data)
 
-        # Prepare data for the second table: Summary by tag
         tag_counts = {}
         for entry in self.all_results:
             for tag in entry["tags"]:
@@ -70,7 +65,6 @@ class QuizAnalysis:
                 else:
                     tag_counts[tag]["incorrect"] += 1
 
-        # Convert tag_counts to a DataFrame
         summary_data = {
             "Tag": list(tag_counts.keys()),
             "Correct Answers": [tag_counts[tag]["correct"] for tag in tag_counts],
@@ -78,7 +72,6 @@ class QuizAnalysis:
         }
         summary_df = pd.DataFrame(summary_data)
 
-        # Write both tables to an Excel file with two sheets
         with pd.ExcelWriter(output_file) as writer:
             detailed_df.to_excel(writer, sheet_name="Detailed Results", index=False)
             summary_df.to_excel(writer, sheet_name="Summary by Tag", index=False)

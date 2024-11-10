@@ -11,29 +11,24 @@ class Trainer:
 
     def train(self):
         for episode in range(self.episodes):
-            state = self.env.reset()  # Start from the initial level
+            state = self.env.reset()
             total_reward = 0
 
             for step in range(self.steps_per_episode):
-                # Agent selects action (difficulty level) based on the current state
+
                 difficulty = self.agent.select_action(state)
 
-                # Environment provides a question and calculates the new state and reward
                 question = self.env.get_question()
 
-                # Simulate the user's response randomly for training purposes
-                correct = random.choice([True, False])  # Randomly simulate user correctness
+                correct = random.choice([True, False])
                 next_state, reward = self.env.step(correct)
                 total_reward += reward
 
-                # Update Q-table for the agent
                 self.agent.update_q_value(state, difficulty, reward, next_state)
                 state = next_state
 
-            # Decay epsilon after each episode to reduce exploration over time
             self.agent.decay_epsilon()
 
-            # Optional: print progress every 100,000 episodes
             if (episode + 1) % 100000 == 0:
                 print(f"Episode {episode + 1}/{self.episodes}, Total Reward: {total_reward}, Epsilon: {self.agent.epsilon}")
 
