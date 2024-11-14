@@ -57,7 +57,7 @@ class BikingQuizGUI:
             self.options.append(option_button)
 
         self.feedback_label = tk.Label(self.root, text="", font=("Arial", 16, "bold"))
-        self.feedback_label.pack(pady=20)
+        self.feedback_label.pack(pady=5)
 
         self.progress_label = tk.Label(self.root, text="Progress to Next Level", font=("Arial", 10))
         self.progress_label.pack(pady=(5, 0))
